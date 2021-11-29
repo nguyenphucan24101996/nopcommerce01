@@ -70,9 +70,10 @@ public class BasePageFactory {
 
 	}
 
-	public void sendkeyToAlert(WebDriver driver, String textValue) {
-		waitForAlertPresence(driver).sendKeys(textValue);
-	}
+	public void sendkeyToAlert(WebDriver driver, WebElement element, String textValue) {
+		element.clear();
+		element.sendKeys(textValue);
+		}
 
 	public void switchToWindowByID(WebDriver driver, String parentID) {
 		Set<String> allWindows = driver.getWindowHandles();
@@ -118,8 +119,8 @@ public class BasePageFactory {
 		return driver.findElements(getByXpath(xpathLocator));
 	}
 
-	public void clickToElement(WebDriver driver, String xpathLocator) {
-		getWebElement(driver, xpathLocator).click();
+	public void clickToElement(WebDriver driver, WebElement element) {
+		element.click();
 	}
 
 	public void sendkeyToElement(WebDriver driver, String xpathLocator, String value) {
@@ -209,9 +210,9 @@ public class BasePageFactory {
 		}
 	}
 
-	public boolean isElementDisplayed(WebDriver driver, String locator) {
+	public boolean isElementDisplayed(WebDriver driver, WebElement element) {
 
-		return getWebElement(driver, locator).isDisplayed();
+	return element.isDisplayed();
 	}
 
 	public boolean isElemenEnabled(WebDriver driver, String locator) {

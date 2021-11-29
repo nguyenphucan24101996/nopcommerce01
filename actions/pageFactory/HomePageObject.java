@@ -5,7 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class HomePageObject {
+import commons.BasePage;
+import commons.BasePageFactory;
+
+public class HomePageObject extends BasePageFactory {
 	private WebDriver driver;
 
 	public HomePageObject(WebDriver driver) {
@@ -22,4 +25,17 @@ public class HomePageObject {
 	private WebElement myaccountLink;
 
 	//page object/Action
+	public void clickToRegisterLink()	{
+		waitForElementClickAble(driver, registerLink);
+		clickToElement(driver, registerLink);
+	}
+	
+	public void clickToLoginLink() {
+		waitForElementClickAble(driver, loginLink);
+		clickToElement(driver, loginLink);
+	}
+	public boolean isMyAccountLinkDisplayed() {
+		waitForElementVisible(driver, myaccountLink);
+		return isElementDisplayed(driver, myaccountLink);
+	}
 }
