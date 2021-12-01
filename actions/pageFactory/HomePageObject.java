@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 
 import commons.BasePage;
 import commons.BasePageFactory;
@@ -13,15 +14,16 @@ public class HomePageObject extends BasePageFactory {
 
 	public HomePageObject(WebDriver driver) {
 		this.driver = driver;
+		PageFactory.initElements(driver, this);
 	}
 
 	@FindBy(how = How.XPATH, using = "//a[@class='ico-register']")
 	private WebElement registerLink;
-	@FindBy(how = How.XPATH, using = "//a[@class='ico-login']")
+	@FindBy(xpath = "//a[@class='ico-login']")
 	private WebElement loginLink;
-	@FindBy(how = How.XPATH, using = "//a[@class='ico-logout']")
-	private WebElement logoutLink;
-	@FindBy(how = How.XPATH, using = "//a[@class='ico-account']")
+//	@FindBy(how = How.XPATH, using = "//a[@class='ico-logout']")
+//	private WebElement logoutLink;
+	@FindBy(css = "//a[@class='ico-account']")
 	private WebElement myaccountLink;
 
 	//page object/Action

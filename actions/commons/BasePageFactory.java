@@ -119,12 +119,11 @@ public class BasePageFactory {
 		return driver.findElements(getByXpath(xpathLocator));
 	}
 
-	public void clickToElement(WebDriver driver, WebElement element) {
+	protected void clickToElement(WebDriver driver, WebElement element) {
 		element.click();
 	}
 
-	public void sendkeyToElement(WebDriver driver, String xpathLocator, String value) {
-		WebElement element = getWebElement(driver, xpathLocator);
+	protected void sendkeyToElement(WebDriver driver, WebElement element, String value) {
 		element.clear();
 		element.sendKeys(value);
 	}
@@ -179,8 +178,8 @@ public class BasePageFactory {
 		return getWebElement(driver, locator).getAttribute(attributname);
 	}
 
-	public String getElementText(WebDriver driver, String xpathLocator) {
-		return getWebElement(driver, xpathLocator).getText();
+	public String getElementText(WebDriver driver, WebElement element) {
+		return element.getText();
 	}
 
 	public String getlementCssValue(WebDriver driver, String locator, String propertyName) {
@@ -211,7 +210,6 @@ public class BasePageFactory {
 	}
 
 	public boolean isElementDisplayed(WebDriver driver, WebElement element) {
-
 	return element.isDisplayed();
 	}
 
