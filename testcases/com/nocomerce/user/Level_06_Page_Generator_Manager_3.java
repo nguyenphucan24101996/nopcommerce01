@@ -12,29 +12,38 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import commons.BasePage;
 import commons.BaseTest;
-import pageFactory.HomePageObject;
-import pageFactory.LoginPageObject;
-import pageFactory.RegisterPageObject;
+import pageObjects.HomePageObject;
+import pageObjects.LoginPageObject;
+import pageObjects.PageGeneratorManager;
+import pageObjects.RegisterPageObject;
 
-public class Level_05_PageFactory extends BaseTest {
+public class Level_06_Page_Generator_Manager_3 extends BaseTest {
 	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
 
 	private WebDriver driver;
 
 	String projectPath = System.getProperty("user.dir");
-	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword, emailAddresserror, emailnotexits;
+	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword,
+			emailAddresserror, emailnotexits;
 	private HomePageObject homePage;
 	private RegisterPageObject registerPage;
 	private LoginPageObject loginPage;
 	// LoginPageObject loginPage = new LoginPageObject(driver);
-	
+
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browserName) {
 		System.out.println("Run on" + browserName);
-		
 		driver = getBrowserDriver(browserName);
+		// System.setProperty("webdriver.gecko.driver", projectPath +
+		// ".\\browserDrivers\\geckodriver.exe");
+		// driver = new ChromeDriver();
+		// Khởi tạo
+		homePage = PageGeneratorManager.getHomePage(driver);
+
+		// driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
 		driver.get("https://demo.nopcommerce.com");
 		firstName = "An";
@@ -48,12 +57,11 @@ public class Level_05_PageFactory extends BaseTest {
 		password = "phucan1!";
 		confirmpassword = "phucan1!";
 		emailnotexits = "123123@gmail.com";
-		homePage = new HomePageObject(driver);
-		loginPage = new LoginPageObject(driver);
-		registerPage = new RegisterPageObject(driver);
-		
+//		loginPage = new LoginPageObject(driver);
+//		registerPage = new RegisterPageObject(driver);
+
 		System.out.println("Pre-condition - Step 01: Click to register link");
-		homePage.clickToRegisterLink();
+		registerPage = homePage.clickToRegisterLink();
 		System.out.println("Pre-condition  - Step 2: Input to required field");
 		registerPage.inputToFirstNameTextbox(firstName);
 		registerPage.inputToLastNameTextbox(lastName);
@@ -65,46 +73,44 @@ public class Level_05_PageFactory extends BaseTest {
 		System.out.println("Pre-condition  - Step 4: Verify msg error displayed");
 		Assert.assertEquals(registerPage.getMessageRegisterSuccess(), "Your registration completed");
 		System.out.println("Pre-condition  - Step 5: Click logout");
-		registerPage.clickToLogoutButton();
+		homePage = registerPage.clickToLogoutButton();
 	}
 
-	
 	@Test
 	public void User_01_Login_Empty_Data() {
-	homePage.clickToLoginLink();
-	loginPage.clickToLoginButton();
-	Assert.assertEquals(loginPage.getErrorMessageRequiredAtEmailTextBox(), "Please enter your email");
-	
+		loginPage = homePage.clickToLoginLink();
+		homePage = loginPage.clickToLoginButton();
+		Assert.assertEquals(loginPage.getErrorMessageRequiredAtEmailTextBox(), "Please enter your email");
+
 	}
 
 	@Test
 	public void User_01_Login_Invalid_Email() {
-	homePage.clickToLoginLink();
-	loginPage.inputToEmailTextBox(emailAddresserror);
-	loginPage.clickToLoginButton();
-	Assert.assertEquals(loginPage.getErrorMessageEmailNotWrong(),"Wrong email");
-	
-	}
+		loginPage = homePage.clickToLoginLink();
+		loginPage.inputToEmailTextBox(emailAddresserror);
+		homePage = loginPage.clickToLoginButton();
+		Assert.assertEquals(loginPage.getErrorMessageEmailNotWrong(), "Wrong email");
 
-	
+	}
 
 	@Test
 	public void User_01_Login_NotExiting_Email() {
-		
-		homePage.clickToLoginLink();
+
+		loginPage = homePage.clickToLoginLink();
 		loginPage.inputToEmailTextBox(emailnotexits);
 		loginPage.inputToPasswordTextBox(password);
-		loginPage.clickToLoginButton();
-		Assert.assertEquals(loginPage.getErrorMessageEmailDoNotExits(),"Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
+		homePage = loginPage.clickToLoginButton();
+		Assert.assertEquals(loginPage.getErrorMessageEmailDoNotExits(),
+				"Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
 
-		
 	}
+
 	@Test
 	public void User_01_Login_Success() {
-		homePage.clickToLoginLink();
+		loginPage = homePage.clickToLoginLink();
 		loginPage.inputToEmailTextBox(emailAddress);
 		loginPage.inputToPasswordTextBox(password);
-		loginPage.clickToLoginButton();
+		homePage = loginPage.clickToLoginButton();
 	}
 
 	public int generateFakeNumber() {

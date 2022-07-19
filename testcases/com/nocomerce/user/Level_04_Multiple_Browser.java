@@ -21,7 +21,7 @@ import pageObjects.RegisterPageObject;
 public class Level_04_Multiple_Browser extends BaseTest {
 	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
 
-	private WebDriver driverTestClass;
+	private WebDriver driver;
 
 	String projectPath = System.getProperty("user.dir");
 	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword, emailAddresserror, emailnotexits;
@@ -34,15 +34,14 @@ public class Level_04_Multiple_Browser extends BaseTest {
 	@BeforeClass
 	public void beforeClass(String browserName) {
 		System.out.println("Run on" + browserName);
-		
-		driverTestClass = getBrowserDriver(browserName);
+		driver = getBrowserDriver(browserName);
 		// gọi đến khơi tạo browser tương ứng
 		
 		//System.setProperty("webdriver.gecko.driver", projectPath + ".\\browserDrivers\\geckodriver.exe");
 		// driver = new ChromeDriver();
 		// Khởi tạo
-		driverTestClass.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-		driverTestClass.get("https://demo.nopcommerce.com");
+		driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
+		driver.get("https://demo.nopcommerce.com");
 		
 		firstName = "An";
 		lastName = "Nguyen";
@@ -55,9 +54,9 @@ public class Level_04_Multiple_Browser extends BaseTest {
 		password = "phucan1!";
 		confirmpassword = "phucan1!";
 		emailnotexits = "123123@gmail.com";
-		homePage = new HomePageObject(driverTestClass);
-		loginPage = new LoginPageObject(driverTestClass);
-		registerPage = new RegisterPageObject(driverTestClass);
+		homePage = new HomePageObject(driver);
+		loginPage = new LoginPageObject(driver);
+		registerPage = new RegisterPageObject(driver);
 		
 		System.out.println("Pre-condition - Step 01: Click to register link");
 		homePage.clickToRegisterLink();

@@ -1,5 +1,7 @@
 package commons;
 
+import java.util.Random;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -14,6 +16,7 @@ public class BaseTest {
 	private String projectPath = System.getProperty("user.dir");
 
 	protected WebDriver getBrowserDriver(String browserName) {
+
 
 		if (browserName.equals("firefox")) {
 			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
@@ -56,5 +59,10 @@ public class BaseTest {
 		}
 		return driverBaseTest;
 
+	}
+	
+	public int generateFakeNumber() {
+		Random rand = new Random();
+		return rand.nextInt(9999);
 	}
 }
