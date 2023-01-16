@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import commons.BasePage;
 import commons.BasePageFactory;
+import pageUIs.nopCommerce.user.HomePageUI;
 
 public class HomePageObject extends BasePageFactory {
 	private WebDriver driver;

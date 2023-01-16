@@ -14,9 +14,9 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import commons.BasePage;
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.RegisterPageObject;
+import pageObjects.nopCommerce.user.UserHomePageObject;
+import pageObjects.nopCommerce.user.UserLoginPageObject;
+import pageObjects.nopCommerce.user.UserRegisterPageObject;
 
 public class Level_06_Page_Generator_Manager_2 extends BaseTest {
 	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
@@ -25,9 +25,9 @@ public class Level_06_Page_Generator_Manager_2 extends BaseTest {
 
 	String projectPath = System.getProperty("user.dir");
 	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword, emailAddresserror, emailnotexits;
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
-	private LoginPageObject loginPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
+	private UserLoginPageObject loginPage;
 	// LoginPageObject loginPage = new LoginPageObject(driver);
 	
 	

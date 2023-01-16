@@ -17,7 +17,6 @@ public class BaseTest {
 
 	protected WebDriver getBrowserDriver(String browserName) {
 
-
 		if (browserName.equals("firefox")) {
 			System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
 			WebDriverManager.firefoxdriver().setup();
@@ -28,7 +27,6 @@ public class BaseTest {
 			options.addArguments("-headless");
 			options.addArguments("window-size=1920x1080");
 			driverBaseTest = new FirefoxDriver(options);
-
 		} else if (browserName.equals("chrome")) {
 			System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
 			WebDriverManager.chromedriver().setup();
@@ -57,10 +55,13 @@ public class BaseTest {
 		} else {
 			throw new RuntimeException("Browser name invalid.");
 		}
+		driverBaseTest.get(GlobalConstants.ADMIN_PAGE_URL);
 		return driverBaseTest;
+		
+		
 
 	}
-	
+
 	public int generateFakeNumber() {
 		Random rand = new Random();
 		return rand.nextInt(9999);

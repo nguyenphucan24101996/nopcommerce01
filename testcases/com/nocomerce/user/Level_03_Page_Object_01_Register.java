@@ -12,9 +12,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import commons.BasePage;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.RegisterPageObject;
+import pageObjects.nopCommerce.user.UserHomePageObject;
+import pageObjects.nopCommerce.user.UserLoginPageObject;
+import pageObjects.nopCommerce.user.UserRegisterPageObject;
 
 public class Level_03_Page_Object_01_Register {
 	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
@@ -23,8 +23,8 @@ public class Level_03_Page_Object_01_Register {
 
 	String projectPath = System.getProperty("user.dir");
 	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword, emailAddresserror;
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
 	// LoginPageObject loginPage = new LoginPageObject(driver);
 	
 	@BeforeClass
@@ -47,8 +47,8 @@ public class Level_03_Page_Object_01_Register {
 		companyName = "ATTA Global";
 		password = "phucan1!";
 		confirmpassword = "phucan1!";
-		homePage = new HomePageObject(driver);
-		registerPage = new RegisterPageObject(driver);
+		homePage = new UserHomePageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 
 	}
 

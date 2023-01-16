@@ -1,16 +1,17 @@
-package pageObjects;
+package pageObjects.nopCommerce.user;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import commons.BasePage;
-import pageUIs.LoginPageUI;
+import pageUIs.nopCommerce.user.HomePageUI;
+import pageUIs.nopCommerce.user.LoginPageUI;
 
-public class LoginPageObject extends BasePage {
+public class UserLoginPageObject extends BasePage {
 	private WebDriver driver;
 	private WebDriverWait explicitWait;
 	
-	public LoginPageObject(WebDriver driver) {
+	public UserLoginPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
 //	
@@ -29,10 +30,10 @@ public class LoginPageObject extends BasePage {
 		sendkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
-	public HomePageObject clickToLoginButton() {
+	public UserHomePageObject clickToLoginButton() {
 		waitForElementClickAble(driver, LoginPageUI.LOGIN_LINK);
 		clickToElement(driver, LoginPageUI.LOGIN_LINK);
-		return PageGeneratorManager.getHomePage(driver);
+		return PageGeneratorManager.getUserHomePage(driver);
 		
 	}
 
@@ -50,6 +51,18 @@ public class LoginPageObject extends BasePage {
 	public String getErrorMessageEmailDoNotExits() {
 		waitForElementVisible(driver, LoginPageUI.ERRORMESSAGE_EMAIL_NOTEXITS);
 		return getElementText(driver, LoginPageUI.ERRORMESSAGE_EMAIL_NOTEXITS);
+	}
+	
+	public UserLoginPageObject clickToLoginLink() {
+		waitForElementClickAble(driver, HomePageUI.LOGIN_LINK);
+		clickToElement(driver, HomePageUI.LOGIN_LINK);
+		return PageGeneratorManager.getUserLoginPage(driver);
+	}
+
+	public UserHomePageObject loginAsuser(String emailAddress, String passsword) {
+		inputToEmailTextBox(emailAddress);
+		inputToPasswordTextBox(passsword);
+		return clickToLoginButton();
 	}
 
 

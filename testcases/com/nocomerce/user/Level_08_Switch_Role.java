@@ -14,22 +14,34 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import commons.BasePage;
 import commons.BaseTest;
+import commons.GlobalConstants;
+import okhttp3.Address;
+import pageObject.nopCommerce.admin.AdminLoginPageObject;
+import pageObjects.nopCommerce.user.UserAddressPageObject;
+import pageObjects.nopCommerce.user.UserCustomerInforPageObject;
 import pageObjects.nopCommerce.user.UserHomePageObject;
 import pageObjects.nopCommerce.user.UserLoginPageObject;
+import pageObjects.nopCommerce.user.UserMyProductreviewPageObject;
 import pageObjects.nopCommerce.user.PageGeneratorManager;
 import pageObjects.nopCommerce.user.UserRegisterPageObject;
+import pageObjects.nopCommerce.user.UserRewardPointPageObject;
 
-public class Level_06_Page_Generator_Manager_3 extends BaseTest {
+public class Level_08_Switch_Role extends BaseTest {
 	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
 
 	private WebDriver driver;
 
 	String projectPath = System.getProperty("user.dir");
 	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword,
-			emailAddresserror, emailnotexits;
+			emailAddresserror, emailnotexits, emailAddress1;
 	private UserHomePageObject homePage;
 	private UserRegisterPageObject registerPage;
 	private UserLoginPageObject loginPage;
+	private UserCustomerInforPageObject customerInforPage;
+	private UserRewardPointPageObject rewardPointPage;
+	private UserMyProductreviewPageObject myProductReviewPage;
+	private UserAddressPageObject addressPage;
+	private AdminLoginPageObject adminLoginPage;
 	// LoginPageObject loginPage = new LoginPageObject(driver);
 
 	@Parameters("browser")
@@ -52,67 +64,28 @@ public class Level_06_Page_Generator_Manager_3 extends BaseTest {
 		month = "May";
 		year = "1999";
 		emailAddress = "soidientan" + generateFakeNumber() + "@gmail.com";
+		emailAddress1 = "soidientan1000@gmail.com";
 		emailAddresserror = "1231231";
 		companyName = "ATTA Global";
-		password = "phucan1!";
-		confirmpassword = "phucan1!";
+		password = "Phucan1!";
+		confirmpassword = "Phucan1!";
 		emailnotexits = "123123@gmail.com";
 		loginPage = new UserLoginPageObject(driver);
 		registerPage = new UserRegisterPageObject(driver);
 
-		System.out.println("Pre-condition - Step 01: Click to register link");
-		registerPage = homePage.clickToRegisterLink();
-		System.out.println("Pre-condition  - Step 2: Input to required field");
-		registerPage.inputToFirstNameTextbox(firstName);
-		registerPage.inputToLastNameTextbox(lastName);
-		registerPage.inputToEmailTextbox(emailAddress);
-		registerPage.inputToPasswordTextbox(password);
-		registerPage.inputToConfirmPasswordTextbox(confirmpassword);
-		System.out.println("Pre-condition  - Step 3: Click register button");
-		registerPage.clickToRegisterButton();
-		System.out.println("Pre-condition  - Step 4: Verify msg error displayed");
-		Assert.assertEquals(registerPage.getMessageRegisterSuccess(), "Your registration completed");
 	}
 
 	@Test
-	public void User_01_Login_Empty_Data() {
+	public void Role_01_User() {
 		loginPage = homePage.clickToLoginLink();
-		homePage = loginPage.clickToLoginButton();
-		Assert.assertEquals(loginPage.getErrorMessageRequiredAtEmailTextBox(), "Please enter your email");
-
+		loginPage.loginAsuser(emailAddress, password);
+		Assert.assertTrue(homePage.isMyAccountLinkDisplayed());
 	}
 
 	@Test
-	public void User_01_Login_Invalid_Email() {
-		loginPage = homePage.clickToLoginLink();
-		loginPage.inputToEmailTextBox(emailAddresserror);
-		homePage = loginPage.clickToLoginButton();
-		Assert.assertEquals(loginPage.getErrorMessageEmailNotWrong(), "Wrong email");
-
-	}
-
-	@Test
-	public void User_01_Login_NotExiting_Email() {
-		loginPage = homePage.clickToLoginLink();
-		loginPage.inputToEmailTextBox(emailnotexits);
-		loginPage.inputToPasswordTextBox(password);
-		homePage = loginPage.clickToLoginButton();
-		Assert.assertEquals(loginPage.getErrorMessageEmailDoNotExits(),
-				"Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
-
-	}
-
-	@Test
-	public void User_01_Login_Success() {
-		loginPage = homePage.clickToLoginLink();
-		loginPage.inputToEmailTextBox(emailAddress);
-		loginPage.inputToPasswordTextBox(password);
-		homePage = loginPage.clickToLoginButton();
-	}
-
-	public int generateFakeNumber() {
-		Random rand = new Random();
-		return rand.nextInt(9999);
+	public void Role_02_Admin() {
+		homePage.openPageUrl(driver, GlobalConstants.ADMIN_PAGE_URL);
+		adminLoginPage = PageGeneratorManager.getAdminLoginPage(driver);
 	}
 
 	@AfterClass

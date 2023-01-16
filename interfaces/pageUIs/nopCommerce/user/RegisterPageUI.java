@@ -1,4 +1,4 @@
-package pageUIs;
+package pageUIs.nopCommerce.user;
 
 public class RegisterPageUI {
 	public static final String GENDER_MALE_RADIO = "//input[@id='gender-male']";
@@ -21,4 +21,5 @@ public class RegisterPageUI {
 	public static final String CONFIRMPASSWORD_ERROR_MESSAGE = "//span[@id='ConfirmPassword-error']";
 	public static final String REGISTER_SUCCESS_MESSAGE = "//div[@class='result']";
 	public static final String EXISTING_EMAIL_ERROR_MESSAGE = "//li[text()='The specified email already exists']";
+	public static final String COUNTINUE_LINK = "///a[@class='button-1 register-continue-button']/";
 }

@@ -3,9 +3,9 @@
 <suite parallel="false" name="User NopCommerce">
 
 	<test name="Run on Firefox">
-		<parameter name="browser" value="firefox" />
+		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.nocomerce.user.Level_06_Page_Generator_Manager_3" />
+			<class name="com.nocomerce.user.Level_07_Switch_Page" />
 		</classes>
 	</test>
-</suite> 
+</suite>  

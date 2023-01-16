@@ -14,9 +14,9 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import commons.BasePage;
 import commons.BaseTest;
-import pageObjects.HomePageObject;
-import pageObjects.LoginPageObject;
-import pageObjects.RegisterPageObject;
+import pageObjects.nopCommerce.user.UserHomePageObject;
+import pageObjects.nopCommerce.user.UserLoginPageObject;
+import pageObjects.nopCommerce.user.UserRegisterPageObject;
 
 public class Level_04_Multiple_Browser extends BaseTest {
 	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
@@ -25,9 +25,9 @@ public class Level_04_Multiple_Browser extends BaseTest {
 
 	String projectPath = System.getProperty("user.dir");
 	String firstName, lastName, day, month, year, emailAddress, companyName, password, confirmpassword, emailAddresserror, emailnotexits;
-	private HomePageObject homePage;
-	private RegisterPageObject registerPage;
-	private LoginPageObject loginPage;
+	private UserHomePageObject homePage;
+	private UserRegisterPageObject registerPage;
+	private UserLoginPageObject loginPage;
 	// LoginPageObject loginPage = new LoginPageObject(driver);
 	
 	@Parameters("browser")
@@ -54,9 +54,9 @@ public class Level_04_Multiple_Browser extends BaseTest {
 		password = "phucan1!";
 		confirmpassword = "phucan1!";
 		emailnotexits = "123123@gmail.com";
-		homePage = new HomePageObject(driver);
-		loginPage = new LoginPageObject(driver);
-		registerPage = new RegisterPageObject(driver);
+		homePage = new UserHomePageObject(driver);
+		loginPage = new UserLoginPageObject(driver);
+		registerPage = new UserRegisterPageObject(driver);
 		
 		System.out.println("Pre-condition - Step 01: Click to register link");
 		homePage.clickToRegisterLink();
