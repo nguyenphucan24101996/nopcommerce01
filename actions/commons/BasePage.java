@@ -3,6 +3,8 @@ package commons;
 import java.util.List;
 import java.util.Set;
 
+import javax.management.RuntimeErrorException;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -116,6 +118,25 @@ public class BasePage {
 
 	public By getByXpath(String locator) {
 		return By.xpath(locator);
+	}
+
+	private By getByLocator(String locatorType) {
+		By by = null;
+		if (locatorType.startsWith("id=")) {
+			by = By.id(locatorType.substring(3));
+		} else if (locatorType.startsWith("class=")) {
+			by = By.className(locatorType.substring(6));
+		} else if (locatorType.startsWith("class=")) {
+			by = By.name(locatorType.substring(5));
+		} else if (locatorType.startsWith("name=")) {
+			by = By.cssSelector(locatorType.substring(4));
+		} else if (locatorType.startsWith("css=")) {
+			by = By.xpath(locatorType.substring(6));
+		} else {
+			throw new RuntimeException("Locator type isn't support");
+
+		}
+		return by;
 	}
 
 	public WebElement getWebElement(WebDriver driver, String xpathLocator) {
