@@ -5,7 +5,7 @@
 	<test name="Run on Firefox">
 		<parameter name="browser" value="chrome" />
 		<classes>
-			<class name="com.nocomerce.user.Level_07_Switch_Page" />
+			<class name="com.nocomerce.user.Level_09_Dymanic_Locator" />
 		</classes>
 	</test>
 </suite>  

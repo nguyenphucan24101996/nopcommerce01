@@ -25,7 +25,7 @@ import pageObjects.nopCommerce.user.UserRegisterPageObject;
 import pageObjects.nopCommerce.user.UserRewardPointPageObject;
 
 public class Level_09_Dymanic_Locator extends BaseTest {
-	// Cái này apply kế thừa để khỏi cần khởi tạo đối tượng
+	// CÃ¡i nÃ y apply káº¿ thá»«a Ä‘á»ƒ khá»�i cáº§n khá»Ÿi táº¡o Ä‘á»‘i tÆ°á»£ng
 
 	private WebDriver driver;
 
@@ -49,7 +49,7 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 		// System.setProperty("webdriver.gecko.driver", projectPath +
 		// ".\\browserDrivers\\geckodriver.exe");
 		// driver = new ChromeDriver();
-		// Khởi tạo
+		// Khá»Ÿi táº¡o
 		homePage = PageGeneratorManager.getUserHomePage(driver);
 
 		// driver = new FirefoxDriver();
@@ -72,7 +72,8 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 
 	}
 
- public void User_01_Register_Login() {
+	@Test
+	public void User_01_Register_Login() {
 		System.out.println("Pre-condition - Step 01: Click to register link");
 		registerPage = homePage.clickToRegisterLink();
 		System.out.println("Pre-condition  - Step 2: Input to required field");
@@ -97,7 +98,6 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 
 	}
 
-	@Test
 	public void User_04_Dynamic_Page() {
 		// Customer infor => Address Page
 		addressPage = customerInforPage.openAddressPage(driver);
@@ -115,18 +115,48 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 		addressPage = rewardPointPage.openAddressPage(driver);
 		System.out.println("Reward pint => Address");
 
-		// address page -> reward point page   
+		// address page -> reward point page
 		rewardPointPage = addressPage.openRewardPointPage(driver);
 
 		// Reward point => my product review page
 		myProductReviewPage = rewardPointPage.openMyProductReviewPage(driver);
-		
-		//myproduc page => customer page
+
+		// myproduc page => customer page
 		customerInforPage = myProductReviewPage.openCustomerInforPage(driver);
 
 	}
 
-	@Test
+	public void User_05_Dynamic_Page_2() {
+		// Customer infor => Address Page
+		addressPage = (UserAddressPageObject) customerInforPage.openPagesAtMyAccountByName(driver, "Addresses");
+		System.out.println("Customer infor => Address");
+
+		// Address => My ProductReview
+		myProductReviewPage = (UserMyProductreviewPageObject) addressPage.openPagesAtMyAccountByName(driver,
+				"My product reviews");
+		System.out.println("Address => My ProductReview");
+
+		// My product page -> Reward point
+		rewardPointPage = (UserRewardPointPageObject) myProductReviewPage.openPagesAtMyAccountByName(driver,
+				"Reward points");
+		System.out.println("My product page -> Reward point");
+
+		// Reward pint => Address
+		addressPage = (UserAddressPageObject) rewardPointPage.openPagesAtMyAccountByName(driver, "Addresses");
+		System.out.println("Reward pint => Address");
+
+		// address page -> reward point page
+		rewardPointPage = (UserRewardPointPageObject) addressPage.openPagesAtMyAccountByName(driver, "Reward points");
+
+		// Reward point => my product review page
+		myProductReviewPage = (UserMyProductreviewPageObject) rewardPointPage.openPagesAtMyAccountByName(driver,
+				"My product reviews");
+
+		// myproduc page => customer page
+		customerInforPage = (UserCustomerInforPageObject) myProductReviewPage.openPagesAtMyAccountByName(driver,
+				"Customer info");
+	}
+
 	public void User_05_User_Role() {
 
 	}
