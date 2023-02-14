@@ -432,11 +432,11 @@ public class BasePage {
 		switch (pageName) {
 		case "Customer info":
 			return PageGeneratorManager.getUserCustomerPage(driver);
-		case "Address":
+		case "Addresses":
 			return PageGeneratorManager.getUserAddressPage(driver);
 		case "My product reviews":
 			return PageGeneratorManager.getUserMyproductReviewPage(driver);
-		case "Reward point":
+		case "Reward points":
 			return PageGeneratorManager.getUserRewardPointPage(driver);
 		default:
 			throw new RuntimeException("Invalid page name at My account area.");

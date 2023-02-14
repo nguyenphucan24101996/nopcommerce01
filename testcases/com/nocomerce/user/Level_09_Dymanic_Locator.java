@@ -97,7 +97,7 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 		Assert.assertTrue(customerInforPage.isCustomerInforPageDisplayed());
 
 	}
-
+	
 	public void User_04_Dynamic_Page() {
 		// Customer infor => Address Page
 		addressPage = customerInforPage.openAddressPage(driver);
@@ -125,16 +125,16 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 		customerInforPage = myProductReviewPage.openCustomerInforPage(driver);
 
 	}
-
+	@Test
 	public void User_05_Dynamic_Page_2() {
 		// Customer infor => Address Page
 		addressPage = (UserAddressPageObject) customerInforPage.openPagesAtMyAccountByName(driver, "Addresses");
-		System.out.println("Customer infor => Address");
+		System.out.println("Customer infor => Addresses");
 
 		// Address => My ProductReview
 		myProductReviewPage = (UserMyProductreviewPageObject) addressPage.openPagesAtMyAccountByName(driver,
 				"My product reviews");
-		System.out.println("Address => My ProductReview");
+		System.out.println("Address => My Product Review");
 
 		// My product page -> Reward point
 		rewardPointPage = (UserRewardPointPageObject) myProductReviewPage.openPagesAtMyAccountByName(driver,
@@ -149,12 +149,10 @@ public class Level_09_Dymanic_Locator extends BaseTest {
 		rewardPointPage = (UserRewardPointPageObject) addressPage.openPagesAtMyAccountByName(driver, "Reward points");
 
 		// Reward point => my product review page
-		myProductReviewPage = (UserMyProductreviewPageObject) rewardPointPage.openPagesAtMyAccountByName(driver,
-				"My product reviews");
+		myProductReviewPage = (UserMyProductreviewPageObject) rewardPointPage.openPagesAtMyAccountByName(driver, "My product reviews");
 
 		// myproduc page => customer page
-		customerInforPage = (UserCustomerInforPageObject) myProductReviewPage.openPagesAtMyAccountByName(driver,
-				"Customer info");
+		customerInforPage = (UserCustomerInforPageObject) myProductReviewPage.openPagesAtMyAccountByName(driver, "Customer info");
 	}
 
 	public void User_05_User_Role() {
