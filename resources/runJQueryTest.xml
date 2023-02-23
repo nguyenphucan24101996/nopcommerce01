@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite parallel="false" name="User NopCommerce">
 
-		<parameter name="url" value="https://jqueryscript.net/demo/CRUD-Data-Grid-Plugin-jQuery-Quickgrid/" />
+		<parameter name="url" value="https://www.jqueryscript.net/demo/jQuery-Dynamic-Data-Grid-Plugin-appendGrid/" />
 	<test name="Run on Firefox">
 		<parameter name="browser" value="chrome" />
 		<classes>

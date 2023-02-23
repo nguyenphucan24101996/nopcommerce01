@@ -56,4 +56,10 @@ public class HomePageObject extends BasePage {
 		}
 		return allRowValueAllPage;
 	}
+
+	public void enterToHeaderTextBoxatRowNumberByColumnName(String columnName, String rowNumber, String value) {
+		int columnIndex = getelementSize(driver, HomePageUI.COLUMN_INDEX_BY_COMPANY, columnName) +1 ;
+		waitForElementVisible(driver, HomePageUI.TEXT_BOX_BY_COLUMN_INDEX_AND_ROW_INDEX, rowNumber, String.valueOf(columnIndex));
+		sendkeyToElement(driver, HomePageUI.TEXT_BOX_BY_COLUMN_INDEX_AND_ROW_INDEX, value, String.valueOf(columnIndex));
+	}
 }

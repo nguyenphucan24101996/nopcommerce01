@@ -40,7 +40,7 @@ public class Level10_DataTable_DataGrid extends BaseTest {
 		homePage = PageGeneratorManager.getHomePage(driver);
 	}
 
-	@Test
+	
 	public void Table_Paging() {
 		homePage.openPagingByPageNumber("10");
 		Assert.assertTrue(homePage.isPageNumberActived("10"));
@@ -53,7 +53,7 @@ public class Level10_DataTable_DataGrid extends BaseTest {
 		
 		
 	}
-	@Test
+	
 	public void User_02_Search_Page() {
 		homePage.refreshCurrnetPage(driver);
 		homePage.enterToHeaderTextBox("Females","624");
@@ -65,7 +65,7 @@ public class Level10_DataTable_DataGrid extends BaseTest {
 		
 	}
 	
-	@Test
+	
 	public void User_03_GetAllValue() {
 		
 		//đọc dữ liệu file country.txt ra
@@ -74,6 +74,20 @@ public class Level10_DataTable_DataGrid extends BaseTest {
 		//actual value
 		actualAllCountryValues = homePage.getValueEachRowAtAllPage();
 		Assert.assertEquals(actualAllCountryValues, expectedAllCountryValues);
+
+		
+	}
+	@Test
+	public void Table_04_Enter_To_TextBox() {
+		//Value để nhập dữ liệu - tham số 1 
+		//Row number : tai row nào
+		//Ex : Nhap textbox dong so 3/5/2
+		//Column name : vd Album Year.,...
+		homePage.enterToHeaderTextBoxatRowNumberByColumnName("Company","2","ABC");
+		
+		homePage.enterToHeaderTextBoxatRowNumberByColumnName("Contact Person","2","1");
+
+		homePage.enterToHeaderTextBoxatRowNumberByColumnName("Order Placed","2","ABC");
 
 		
 	}
